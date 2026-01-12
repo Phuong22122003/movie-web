@@ -12,7 +12,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-
+  invalidCredential: boolean = false;
   constructor(private fb: FormBuilder,
      private authService: AuthenticationService,
      private router: Router
@@ -31,6 +31,9 @@ export class LoginComponent {
         (res)=>{
           localStorage.setItem('jwt',res.jwt);
           this.router.navigateByUrl('/home');
+        },
+        ()=>{
+          this.invalidCredential = true;
         }
       );
     }

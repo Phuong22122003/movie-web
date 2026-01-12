@@ -1,12 +1,18 @@
-<div>
-    <div class="pt-10 flex items-center justify-between">
-        <h3 class="text-3xl" >Recommendation</h3>
-        <div class="flex items-center">
-            <a href="">View all</a>
-            <i class="fa-solid fa-arrow-right"></i>
-        </div>
-    </div>
-    <div class="flex flex-row flex-grow gap-4 pt-5 flex-wrap">
-        <app-card *ngFor="let movie of movies" [movie]="movie"></app-card>
-    </div>
+<div class="space-y-6 text-white">
+
+  <div class="flex justify-between items-center">
+    <h3 class="text-3xl font-semibold">Recommendation</h3>
+    <a class="text-sm text-gray-400 hover:text-white flex items-center gap-1">
+      View all
+      <i class="fa-solid fa-arrow-right"></i>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+    <app-card
+      *ngFor="let movie of movies"
+      [movie]="movie"
+    ></app-card>
+  </div>
+
 </div>

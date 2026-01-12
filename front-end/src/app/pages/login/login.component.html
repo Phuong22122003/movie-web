@@ -5,6 +5,12 @@ class="min-h-screen bg-[url('./assets/background.jpg')] bg-cover bg-center flex 
     <h2 class="text-3xl font-bold mb-6 text-center tracking-widest">MovieHub Login</h2>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div 
+        *ngIf="invalidCredential"
+        class="text-red-400 text-sm text-center"
+      >
+        Username or password are incorrect!
+      </div>
       <div class="mb-4">
         <label class="block mb-1 text-sm font-medium text-gray-300">Username</label>
         <input
@@ -33,7 +39,7 @@ class="min-h-screen bg-[url('./assets/background.jpg')] bg-cover bg-center flex 
 
       <button
         type="submit"
-        class="w-full bg-red-600 text-white py-2 rounded-xl hover:bg-red-700 transition"
+        class="w-full bg-red-600 text-white py-2 rounded-xl hover:bg-red-700 transition cursor-pointer"
         [disabled]="loginForm.invalid"
       >
         Login

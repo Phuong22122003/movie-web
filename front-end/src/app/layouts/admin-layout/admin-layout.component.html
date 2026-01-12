@@ -1,21 +1,69 @@
-<div class="min-h-screen flex">
-  <!-- Sidebar -->
-  <aside class="w-64 bg-black text-white flex flex-col p-4 border border-right">
-    <h2 class="text-2xl font-bold mb-6">Admin</h2>
+<div class="min-h-screen bg-[#0f0f0f] text-white">
 
-    <nav class="flex-1 space-y-2">
-      <a routerLink="/admin/movie" class="block px-3 py-2 rounded hover:bg-gray-700">Movies</a>
-      <a routerLink="/admin/country" class="block px-3 py-2 rounded hover:bg-gray-700">Countries</a>
-      <a routerLink="/admin/genre" class="block px-3 py-2 rounded hover:bg-gray-700">Genres</a>
+  <!-- SIDEBAR -->
+  <aside
+    class="fixed top-0 left-0 h-screen w-64
+           bg-black border-r border-white/10
+           flex flex-col z-40"
+  >
+
+    <!-- Logo -->
+    <div class="px-6 py-5 border-b border-white/10">
+      <h2 class="text-2xl font-bold text-red-600">MOVIX</h2>
+      <span class="text-xs text-gray-400">Admin Panel</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 px-4 py-6 space-y-1 text-sm overflow-y-auto">
+      <a
+        routerLink="/admin/movie"
+        routerLinkActive="bg-white/10 text-white"
+        class="flex items-center gap-3 px-4 py-2 rounded-md
+               text-gray-300 hover:bg-white/10"
+      >
+        <i class="fa-solid fa-film"></i>
+        Movies
+      </a>
+
+      <a
+        routerLink="/admin/country"
+        routerLinkActive="bg-white/10 text-white"
+        class="flex items-center gap-3 px-4 py-2 rounded-md
+               text-gray-300 hover:bg-white/10"
+      >
+        <i class="fa-solid fa-globe"></i>
+        Countries
+      </a>
+
+      <a
+        routerLink="/admin/genre"
+        routerLinkActive="bg-white/10 text-white"
+        class="flex items-center gap-3 px-4 py-2 rounded-md
+               text-gray-300 hover:bg-white/10"
+      >
+        <i class="fa-solid fa-tags"></i>
+        Genres
+      </a>
     </nav>
 
-    <button (click)="logout()" class="mt-auto bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white">
-      Logout
-    </button>
+    <!-- Logout -->
+    <div class="p-4 border-t border-white/10">
+      <button
+        (click)="logout()"
+        class="w-full bg-red-600 hover:bg-red-700 py-2 rounded-md
+               flex items-center justify-center gap-2"
+      >
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+      </button>
+    </div>
   </aside>
 
-  <!-- Main Content -->
-  <main class="flex-1 p-4 bg-black">
+  <!-- MAIN -->
+  <main
+    class="ml-64 min-h-screen p-8 overflow-y-auto"
+  >
     <router-outlet></router-outlet>
   </main>
+
 </div>

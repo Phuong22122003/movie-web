@@ -1,19 +1,21 @@
-<div 
-  class="w-[200px] h-[270px] flex flex-col gap-2 cursor-pointer" 
+<div
+  class="w-[200px] flex-shrink-0 cursor-pointer group"
   [routerLink]="['/movie', movie.id]"
 >
-  <img
-    src="{{ movie.image_url }}"
-    alt=""
-    class="rounded-md flex-grow h-[80%]"
-  />
-  <div class="flex justify-between">
-    <span class="truncate">{{ movie.name }}</span>
-    <div class="flex gap-1">
-        <!-- <ng-container *ngIf="movie.genres">
-          <span class="bg-[#FF0000] text-white rounded-[5px] px-1"  *ngFor="let genre of movie.genres">{{ genre.name }}</span>
-        </ng-container> -->
-        <span class="bg-red-500 rounded-[5px] px-1">HD</span>
-    </div>
+  <div class="relative overflow-hidden rounded-lg">
+    <img
+      [src]="movie.image_url"
+      class="h-[280px] w-full object-cover group-hover:scale-110 transition duration-300"
+    />
+
+    <span
+      class="absolute top-2 left-2 bg-red-600 text-xs px-2 py-1 rounded"
+    >
+      HD
+    </span>
   </div>
+
+  <h3 class="mt-2 text-sm font-medium truncate">
+    {{ movie.name }}
+  </h3>
 </div>

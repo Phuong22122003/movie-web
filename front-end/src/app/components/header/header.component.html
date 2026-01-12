@@ -1,80 +1,119 @@
-<div
-  class="flex flex-row items-center justify-center sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10 bg-black py-8 text-white"
->
-  <div>
-    <ul
-      class="flex flex-row items-center justify-center sm:gap-2 md:gap-4 lg:gap-6 xl:gap-8"
-    >
-      <li><a routerLink="/home">Home</a></li>
-      <li class="relative group cursor-pointer text-white hover:text-gray-400">
-        Genre
-        <!-- Dropdown Menu -->
-        <ul
-          class="absolute top-full left-0 mt-0 hidden group-hover:flex flex-col bg-white text-black rounded shadow-lg z-50 min-w-[160px] max-h-[300px] overflow-y-auto py-2"
-        >
-          <ng-container *ngFor="let genre of genres">
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" routerLink="/genres/{{genre.name}}">{{genre.name}}</li>
-          </ng-container>
-          <!-- <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Adventure</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Drama</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Horror</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Sci-Fi</li> -->
-          <!-- Add more items as needed -->
-        </ul>
-      </li>
+<header class="sticky top-0 z-50 bg-black/90 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between text-white">
 
-      <li class="relative group cursor-pointer text-white hover:text-gray-400">
-        Country
-        <!-- Dropdown Menu -->
-        <ul
-          class="absolute top-full left-0 mt-0 hidden group-hover:flex flex-col bg-white text-black rounded shadow-lg z-50 min-w-[160px] max-h-[300px] overflow-y-auto py-2"
-        >
-          <ng-container *ngFor="let country of countries">
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" routerLink="/country/{{country.name}}">{{country.name}}</li>
-          </ng-container>
-          <!-- Add more items as needed -->
-        </ul>
-      </li>
-    </ul>
-  </div>
-  <div
-    class="flex items-center lg:w-[416px] bg-white rounded-full text-black px-3 py-2"
-  >
-    <input
-      #searchInput
-      type="text"
-      placeholder="Search movies ..."
-      class="flex-grow focus:border-0 focus:outline-none focus:ring-0"
-      (keydown.enter)="onSearch(searchInput.value)"
+    <!-- LEFT -->
+    <div class="flex items-center gap-10">
+
+      <!-- LOGO -->
+      <a routerLink="/home" class="text-2xl font-bold text-red-600">
+        MOVIX
+      </a>
+
+      <!-- MAIN NAV -->
+      <ul class="hidden md:flex items-center gap-6 text-sm">
+        <li>
+          <a routerLink="/home" class="hover:text-gray-400">Home</a>
+        </li>
+
+        <!-- Genre Dropdown -->
+        <li class="relative group">
+          <span class="cursor-pointer hover:text-gray-400">Genre</span>
+          <ul
+            class="absolute top-full left-0 mt-3 invisible group-hover:visible
+                   bg-white text-black rounded-md shadow-lg duration-150 
+                   min-w-[180px] max-h-[280px] overflow-y-auto py-2"
+          >
+            <li
+              *ngFor="let genre of genres"
+              routerLink="/genres/{{genre.name}}"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+            >
+              {{ genre.name }}
+            </li>
+          </ul>
+        </li>
+
+        <!-- Country Dropdown -->
+        <li class="relative group">
+          <span class="cursor-pointer hover:text-gray-400">Country</span>
+          <ul
+            class="absolute top-full left-0 mt-3 invisible group-hover:visible
+                   bg-white text-black rounded-md shadow-lg duration-150
+                   min-w-[180px] max-h-[280px] overflow-y-auto py-2"
+          >
+            <li
+              *ngFor="let country of countries"
+              routerLink="/country/{{country.name}}"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+            >
+              {{ country.name }}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CENTER SEARCH -->
+    <div class="hidden lg:flex items-center bg-white rounded-full px-4 py-2 w-[380px] text-black">
+      <i class="fa-solid fa-magnifying-glass text-gray-500"></i>
+      <input
+        #searchInput
+        type="text"
+        placeholder="Search movies, series..."
+        class="ml-3 flex-grow bg-transparent focus:outline-none text-sm"
+        (keydown.enter)="onSearch(searchInput.value)"
       />
-    <div class="cursor-pointer">
-      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="flex items-center gap-6 text-sm">
+
+      <!-- CATEGORY -->
+      <ul class="hidden lg:flex items-center gap-4">
+        <li class="hover:text-gray-400 cursor-pointer">Movies</li>
+        <li class="hover:text-gray-400 cursor-pointer">Series</li>
+        <li class="hover:text-gray-400 cursor-pointer">Animation</li>
+      </ul>
+
+      <!-- AUTH -->
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/login" class="hover:text-gray-400">Login</a>
+        <a
+          routerLink="/sigup"
+          class="bg-red-600 hover:bg-red-700 px-4 py-1.5 rounded-full text-white"
+        >
+          Sign Up
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="isLoggedIn">
+        <button
+          (click)="logout()"
+          class="hover:text-gray-400"
+        >
+          Logout
+        </button>
+      </ng-container>
+
+      <!-- NOTIFICATION -->
+      <button class="relative hover:text-gray-400">
+        <i class="fa-solid fa-bell"></i>
+        <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-600 rounded-full"></span>
+      </button>
     </div>
   </div>
-  <div>
-    <ul
-      class="flex flex-row items-center justify-center sm:gap-2 md:gap-4 lg:gap-6 xl:gap-8"
-    >
-      <li>Movies</li>
-      <li>Series</li>
-      <li>Animation</li>
-    </ul>
-  </div>
-  <div>
-    <ul
-      class="flex flex-row items-center justify-center sm:gap-2 md:gap-4 lg:gap-6 xl:gap-8"
-    >
 
-      <ng-container *ngIf="isLoggedIn==false">
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/sigup">Sign Up</a></li>
-      </ng-container>
-      <ng-container *ngIf="isLoggedIn==true">
-        <li (click)="logout()">Logout</li>
-      </ng-container>
-      <li>
-        <i class="fa-solid fa-bell"></i>
-      </li>
-    </ul>
+  <!-- MOBILE SEARCH -->
+  <div class="lg:hidden px-6 pb-3">
+    <div class="flex items-center bg-white rounded-full px-4 py-2 text-black">
+      <i class="fa-solid fa-magnifying-glass text-gray-500"></i>
+      <input
+        #searchInput
+        type="text"
+        placeholder="Search movies..."
+        class="ml-3 flex-grow bg-transparent focus:outline-none text-sm"
+        (keydown.enter)="onSearch(searchInput.value)"
+      />
+    </div>
   </div>
-</div>
+</header>

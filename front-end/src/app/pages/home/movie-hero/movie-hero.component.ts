@@ -21,9 +21,9 @@ export class MovieHeroComponent {
   ngOnInit() {
     this.movieService.getMovieSlot().subscribe((movies)=>{
       this.movies = movies;
-      setInterval(() => {
-        this.currentIndex = (this.currentIndex + 1) % this.movies.length;
-      }, 5000);
+      // setInterval(() => {
+      //   this.currentIndex = (this.currentIndex + 1) % this.movies.length;
+      // }, 5000);
     });
 
   }

@@ -1,8 +1,14 @@
+<div class="w-full">
+  <div *ngIf="!movieUrl" class="flex justify-center items-center aspect-video bg-black rounded-lg">
+    <div class="animate-spin rounded-full h-10 w-10 border-4 border-white/20 border-t-red-500"></div>
+  </div>
 
-<div *ngIf="!movieUrl" class="flex justify-center items-center h-150">
-  <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500 border-solid"></div>
+  <video
+    *ngIf="movieUrl"
+    [src]="movieUrl"
+    controls
+    class="w-full aspect-[16/6] rounded-lg bg-black"
+  >
+  </video>
+
 </div>
-
-<video *ngIf="movieUrl" controls class="h-150 w-full">
-  <source [src]="movieUrl" type="video/mp4" />
-</video>

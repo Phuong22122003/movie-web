@@ -1,44 +1,76 @@
-<div>
+<div class="bg-[#0f0f0f] min-h-screen text-white">
   <app-movie-hero></app-movie-hero>
 
-  <div class="mx-30 text-white">
-    <h3 class="pt-10 text-2xl">Recently Updated</h3>
-    <div class="flex items-center gap-4 pt-5">
-        <div class="flex flex-row justify-between flex-grow gap-4">
+  <div class="px-6 lg:px-20 space-y-14">
 
-            <app-small-card *ngFor="let movie of recentlyUpdatedMovie" [movie]="movie"></app-small-card>
-        </div>
-        <i class="fa-solid fa-arrow-right"></i>
-    </div>
-    <div class="pt-10 flex items-center justify-between">
-        <h3 class="text-2xl" >Trending</h3>
-        <div class="flex items-center">
-            <a href="">View all</a>
-            <i class="fa-solid fa-arrow-right"></i>
-        </div>
-    </div>
-    <div class="flex flex-row gap-4 pt-5 overflow-x-auto scrollbar-hide">
-        <app-card *ngFor="let movie of movies" [movie]="movie"></app-card>
-    </div>
-    <div class="pt-10 flex items-center justify-between">
-        <h3 class=" text-2xl" >New Release</h3>
-        <div class="flex items-center">
-            <a href="">View all</a>
-            <i class="fa-solid fa-arrow-right"></i>
-        </div>
-    </div>
-    <div class="flex flex-row gap-4 pt-5 overflow-x-auto scrollbar-hide">
-        <app-card *ngFor="let movie of movies" [movie]="movie"></app-card>
-    </div>
-    <div class="pt-10 flex items-center justify-between">
-        <h3 class="text-2xl">Recommended</h3>
-        <div class="flex items-center">
-            <a href="">View all</a>
-            <i class="fa-solid fa-arrow-right"></i>
-        </div>
-    </div>
-    <div class="flex flex-row gap-4 pt-5 overflow-x-auto scrollbar-hide">
-        <app-card *ngFor="let movie of movies" [movie]="movie" ></app-card>
-    </div>
+    <!-- Recently Updated -->
+    <section>
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-semibold">Recently Updated</h2>
+        <i class="fa-solid fa-arrow-right text-gray-400 hover:text-white cursor-pointer"></i>
+      </div>
+
+      <div class="flex gap-4 overflow-x-auto scrollbar-hide">
+        <app-small-card
+          *ngFor="let movie of recentlyUpdatedMovie"
+          [movie]="movie"
+        ></app-small-card>
+      </div>
+    </section>
+
+    <!-- Trending -->
+    <section>
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-semibold">Trending</h2>
+        <a class="text-sm text-gray-400 hover:text-white flex items-center gap-1">
+          View all
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="flex gap-4 overflow-x-auto scrollbar-hide">
+        <app-card
+          *ngFor="let movie of movies"
+          [movie]="movie"
+        ></app-card>
+      </div>
+    </section>
+
+    <!-- New Release -->
+    <section>
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-semibold">New Release</h2>
+        <a class="text-sm text-gray-400 hover:text-white flex items-center gap-1">
+          View all
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="flex gap-4 overflow-x-auto scrollbar-hide">
+        <app-card
+          *ngFor="let movie of movies"
+          [movie]="movie"
+        ></app-card>
+      </div>
+    </section>
+
+    <!-- Recommended -->
+    <section>
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-semibold">Recommended for You</h2>
+        <a class="text-sm text-gray-400 hover:text-white flex items-center gap-1">
+          View all
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="flex gap-4 overflow-x-auto scrollbar-hide">
+        <app-card
+          *ngFor="let movie of movies"
+          [movie]="movie"
+        ></app-card>
+      </div>
+    </section>
+
   </div>
 </div>

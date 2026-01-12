@@ -7,29 +7,30 @@ import { CommentComponent } from "./comment/comment.component";
 import { MovieService } from '../../service/movie.service';
 import { Movie } from '../../models/movie';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-movie',
-  imports: [FilmCardComponent, DetailComponent, RecommendationComponent, CommentComponent],
+  imports: [FilmCardComponent, DetailComponent, RecommendationComponent, CommentComponent, CommonModule],
   templateUrl: './movie.component.html',
   styleUrl: './movie.component.scss'
 })
 export class MovieComponent {
-  movieId!: string;
   movie!: Movie;
   constructor(private route: ActivatedRoute, private movieService: MovieService) {
-    let movieId = this.route.snapshot.paramMap.get('id');
-    if (movieId != null) {
-      this.movieId = movieId;
-    }
   }
-  loadMovie() {
-    this.movieService.getById(this.movieId).subscribe((movie) => { 
+  loadMovie(id:any) {
+    this.movieService.getById(id).subscribe((movie) => { 
       this.movie = movie;
       console.log(this.movie);
     });
   }
   ngOnInit() {
-    this.loadMovie();
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.loadMovie(id);
+      }
+    });
   }
 }

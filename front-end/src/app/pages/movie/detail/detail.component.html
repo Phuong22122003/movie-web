@@ -1,41 +1,49 @@
-<div class="flex gap-5 flex-col sm:flex-row">
-  <div class="lg:min-w-100 lg:min-h-100">
-    <img class="h-full w-full rounded-md" src="{{ movie.image_url }}" alt="" />
+<div class="flex flex-col lg:flex-row gap-10 text-white">
+
+  <!-- POSTER -->
+  <div class="lg:w-[280px] flex-shrink-0">
+    <img
+      [src]="movie.image_url"
+      class="rounded-lg shadow-lg w-full"
+    />
   </div>
-  <div class="flex-grow flex flex-col justify-around">
-    <div class="flex justify-between">
-      <h3 class="text-3xl font-bold">{{ movie.name }}</h3>
-      <button class="bg-[#FF0000] px-2 py-2 flex rounded-[5px] cursor-pointer h-fit">
-        <div>
-          <i class="fa-solid fa-plus"></i>
-        </div>
-        <span>Add to favourite</span>
+
+  <!-- INFO -->
+  <div class="flex-grow space-y-4">
+
+    <!-- Title + Action -->
+    <div class="flex justify-between items-start">
+      <h1 class="text-4xl font-bold">{{ movie.name }}</h1>
+
+      <button
+        class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md flex items-center gap-2"
+      >
+        <i class="fa-solid fa-plus"></i>
+        Favourite
       </button>
     </div>
-    <div class="flex gap-4">
-      <button class="bg-white rounded-md px-2 py-2 text-black" *ngFor="let genre of movie.genres">{{genre.name}}</button>
+
+    <!-- Genres -->
+    <div class="flex flex-wrap gap-2">
+      <span
+        *ngFor="let genre of movie.genres"
+        class="bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full text-sm"
+      >
+        {{ genre.name }}
+      </span>
     </div>
-    <div>
+
+    <!-- Description -->
+    <p class="text-gray-300 leading-relaxed">
       {{ movie.description }}
+    </p>
+
+    <!-- Meta -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-gray-300">
+      <span><b>Country:</b> {{ movie.country?.name || 'Unknown' }}</span>
+      <span><b>Release:</b> {{ movie.createdDate }}</span>
+      <span><b>Actor:</b> Phuong</span>
     </div>
-    <div class="flex flex-col justify-between gap-2">
-      <span>Country: {{ movie.country?.name || "Unknow" }}</span>
-      <div class="flex gap-2">
-        <span>Genre:</span>
 
-        <!-- Nếu có genres -->
-      <ng-container *ngIf="movie.genres?.length; else noGenres">
-          <span *ngFor="let genre of movie.genres">{{ genre.name }}</span>
-        </ng-container>
-
-        <!-- Nếu không có genres -->
-        <ng-template #noGenres>
-          <span>Unknown genre</span>
-        </ng-template>
-      </div>
-
-      <span>Release date: {{movie.createdDate}}</span>
-      <span>Actor: Phuong</span>
-    </div>
   </div>
 </div>

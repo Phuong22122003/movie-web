@@ -1,16 +1,23 @@
-<div class="w-[170px] h-[250px] flex flex-col gap-2 cursor-pointer">
-  <img
-    src="{{ movie.image_url }}"
-    alt=""
-    class="rounded-md flex-grow h-[80%] w-full"
-  />
-  <div class="flex justify-between">
-    <span class="truncate text-white">{{ movie.name }}</span>
-    <div class="flex gap-1">
-        <ng-container *ngIf="movie.genres">
-          <span class="bg-[#FF0000] text-white rounded-[5px] px-1"  *ngFor="let genre of movie.genres">{{ genre.name }}</span>
-        </ng-container>
-        <span class="bg-red-500 rounded-[5px] px-1">HD</span>
-    </div>
+<div class="cursor-pointer group text-white">
+
+  <!-- Poster -->
+  <div class="relative h-[250px] overflow-hidden rounded-lg">
+    <img
+      [src]="movie.image_url"
+      class="absolute inset-0 w-full h-full object-cover
+             group-hover:scale-110 transition duration-300"
+    />
+
+    <span
+      class="absolute top-2 left-2 bg-red-600 text-xs px-2 py-1 rounded"
+    >
+      HD
+    </span>
   </div>
+
+  <!-- Title -->
+  <h3 class="mt-2 text-sm truncate">
+    {{ movie.name }}
+  </h3>
+
 </div>

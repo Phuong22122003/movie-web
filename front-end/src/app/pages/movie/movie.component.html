@@ -1,6 +1,29 @@
-<div class="mx-30 flex flex-col gap-4">
-    <app-film-card [movieUrl]="movie?.video_url"></app-film-card>
+<div class="max-w-[1400px] mx-auto px-6 py-10 space-y-20">
+
+  <!-- VIDEO -->
+  <section class="flex justify-center">
+    <div class="w-full max-w-8xl max-h-5xl">
+      <app-film-card
+        *ngIf="movie?.video_url"
+        [movieUrl]="movie.video_url"
+      ></app-film-card>
+    </div>
+  </section>
+
+
+  <!-- DETAIL -->
+  <section class="bg-[#141414] rounded-xl p-8">
     <app-detail [movie]="movie"></app-detail>
+  </section>
+
+  <!-- COMMENTS -->
+  <section class="bg-[#141414] rounded-xl p-8">
     <app-comment [movieId]="movie.id"></app-comment>
+  </section>
+
+  <!-- RECOMMENDATION -->
+  <section>
     <app-recommendation></app-recommendation>
+  </section>
+
 </div>

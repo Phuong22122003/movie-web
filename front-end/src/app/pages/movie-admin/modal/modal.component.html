@@ -1,124 +1,138 @@
 <div
   *ngIf="showModal"
-  class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
+  class="fixed inset-0 z-50 flex items-center justify-center
+         bg-black/70 backdrop-blur-sm px-4"
 >
   <div
-    class="bg-zinc-900 text-white rounded-2xl p-8 w-full max-w-2xl shadow-xl relative"
+    class="bg-zinc-900 text-white rounded-2xl shadow-2xl
+           w-full max-w-3xl max-h-[90vh] overflow-hidden"
   >
-    <!-- Close Button -->
-    <button
-      (click)="closeModal()"
-      class="absolute top-4 right-5 text-gray-400 hover:text-white text-2xl"
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between px-8 py-5 border-b border-white/10">
+      <h3 class="text-xl font-semibold tracking-wide">
+        {{ isEditing ? 'Edit Movie' : 'Add New Movie' }}
+      </h3>
+
+      <button
+        (click)="closeModal()"
+        class="text-gray-400 hover:text-white text-2xl leading-none"
+      >
+        &times;
+      </button>
+    </div>
+
+    <!-- BODY -->
+    <form
+      [formGroup]="movieForm"
+      (ngSubmit)="submit()"
+      class="px-8 py-6 overflow-y-auto max-h-[calc(90vh-140px)] space-y-6"
     >
-      &times;
-    </button>
 
-    <!-- Title -->
-    <h3 class="text-2xl font-semibold mb-6 text-center tracking-wide">
-      {{ isEditing ? "Edit Movie" : "Add New Movie" }}
-    </h3>
+      <!-- GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-    <!-- Form -->
-    <form [formGroup]="movieForm" (ngSubmit)="submit()" class="space-y-5">
-      <!-- Name -->
-      <div>
-        <label class="block text-sm mb-1 font-medium text-gray-300"
-          >Movie Name</label
-        >
-        <input
-          formControlName="name"
-          type="text"
-          placeholder="Enter movie name..."
-          class="w-full px-4 py-2 bg-zinc-800 text-white border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-        />
-      </div>
-
-      <!-- Description -->
-      <div>
-        <label class="block text-sm mb-1 font-medium text-gray-300"
-          >Description</label
-        >
-        <textarea
-          formControlName="description"
-          rows="3"
-          placeholder="Short movie description..."
-          class="w-full px-4 py-2 bg-zinc-800 text-white border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-        ></textarea>
-      </div>
-      <div>
-        <label class="block text-sm mb-1 font-medium text-gray-300"
-          >Country</label
-        >
-        <ng-select
-          [items]="countries"
-          bindLabel="name"
-          bindValue="id"
-          formControlName="countryId"
-        >
-        </ng-select>
-      </div>
-      <div>
-        <label class="block text-sm mb-1 font-medium text-gray-300"
-          >Genres</label
-        >
-        <ng-select
-          [items]="genres"
-          bindLabel="name"
-          bindValue="id"
-          formControlName="genreIds"
-          [multiple]="true"
-        >
-        </ng-select>
-      </div>
-
-      <!-- Image Upload -->
-      <div>
-        <label class="block text-sm mb-1 font-medium text-gray-300"
-          >Upload Image</label
-        >
-        <input
-          type="file"
-          accept="image/*"
-          (change)="onImageSelected($event)"
-          class="file:bg-red-600 file:text-white file:px-4 file:py-1.5 file:rounded-full file:border-0 file:font-medium file:cursor-pointer bg-zinc-800 text-gray-300 rounded-lg w-full"
-        />
-        <div *ngIf="imageFile" class="text-xs mt-1 text-gray-400">
-          Selected: {{ imageFile.name }}
+        <!-- Name -->
+        <div>
+          <label class="block text-sm mb-1 text-gray-400">Movie Name</label>
+          <input
+            formControlName="name"
+            type="text"
+            placeholder="Enter movie name"
+            class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
         </div>
-      </div>
 
-      <!-- Video Upload -->
-      <div>
-        <label class="block text-sm mb-1 font-medium text-gray-300"
-          >Upload Video</label
-        >
-        <input
-          type="file"
-          accept="video/*"
-          (change)="onVideoSelected($event)"
-          class="file:bg-blue-600 file:text-white file:px-4 file:py-1.5 file:rounded-full file:border-0 file:font-medium file:cursor-pointer bg-zinc-800 text-gray-300 rounded-lg w-full"
-        />
-        <div *ngIf="videoFile" class="text-xs mt-1 text-gray-400">
-          Selected: {{ videoFile.name }}
+        <!-- Country -->
+        <div>
+          <label class="block text-sm mb-1 text-gray-400">Country</label>
+          <ng-select
+            class="ng-dark"
+            [items]="countries"
+            bindLabel="name"
+            bindValue="id"
+            formControlName="countryId"
+          ></ng-select>
         </div>
+
+        <!-- Description -->
+        <div class="md:col-span-2">
+          <label class="block text-sm mb-1 text-gray-400">Description</label>
+          <textarea
+            formControlName="description"
+            rows="3"
+            placeholder="Short movie description..."
+            class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-red-500"
+          ></textarea>
+        </div>
+
+        <!-- Genres -->
+        <div class="md:col-span-2">
+          <label class="block text-sm mb-1 text-gray-400">Genres</label>
+          <ng-select
+            class="ng-dark"
+            [items]="genres"
+            bindLabel="name"
+            bindValue="id"
+            formControlName="genreIds"
+            [multiple]="true"
+          ></ng-select>
+        </div>
+
+        <!-- Image Upload -->
+        <div>
+          <label class="block text-sm mb-1 text-gray-400">Poster Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onImageSelected($event)"
+            class="file:bg-red-600 file:text-white file:px-4 file:py-1.5
+                   file:rounded-full file:border-0 file:cursor-pointer
+                   bg-zinc-800 text-gray-300 rounded-lg w-full"
+          />
+          <p *ngIf="imageFile" class="text-xs mt-1 text-gray-400 truncate">
+            {{ imageFile.name }}
+          </p>
+        </div>
+
+        <!-- Video Upload -->
+        <div>
+          <label class="block text-sm mb-1 text-gray-400">Video File</label>
+          <input
+            type="file"
+            accept="video/*"
+            (change)="onVideoSelected($event)"
+            class="file:bg-blue-600 file:text-white file:px-4 file:py-1.5
+                   file:rounded-full file:border-0 file:cursor-pointer
+                   bg-zinc-800 text-gray-300 rounded-lg w-full"
+          />
+          <p *ngIf="videoFile" class="text-xs mt-1 text-gray-400 truncate">
+            {{ videoFile.name }}
+          </p>
+        </div>
+
       </div>
 
-      <!-- Buttons -->
-      <div class="flex justify-end gap-4 pt-4">
+      <!-- FOOTER -->
+      <div class="flex justify-end gap-3 pt-6 border-t border-white/10">
         <button
           type="button"
           (click)="closeModal()"
-          class="bg-gray-600 hover:bg-gray-500 text-white px-5 py-2 rounded-lg transition"
+          class="px-5 py-2 rounded-lg bg-zinc-700 hover:bg-zinc-600 transition"
         >
           Cancel
         </button>
+
         <button
           type="submit"
-          class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition"
+          class="px-6 py-2 rounded-lg bg-red-600 hover:bg-red-700 font-medium transition"
         >
-          {{ isEditing ? "Update Movie" : "Add Movie" }}
+          {{ isEditing ? 'Update Movie' : 'Add Movie' }}
         </button>
       </div>
+
     </form>
   </div>
 </div>
