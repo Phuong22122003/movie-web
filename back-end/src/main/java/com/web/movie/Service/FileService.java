@@ -6,8 +6,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
+import java.util.Objects;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +27,25 @@ import com.web.movie.CustomException.VideoException;
 public class FileService {
     @Value("${file.upload-dir}")
     private String uploadDir;
+    @Autowired private RedisTemplate<String,Object> redisTemplate;
+    public Resource getResource(String filename, MediaType mediaType, HttpServletRequest request) throws IOException {
+
+        Path path = Paths.get(uploadDir+"/" + filename);
+        byte[] imageBytes = Files.readAllBytes(path);
+
+        ByteArrayResource resource = new ByteArrayResource(imageBytes);
+
+        if(Objects.equals(mediaType, MediaType.valueOf("video/mp4"))){
+            String userIp = request.getRemoteAddr();
+            Object isExist =  redisTemplate.opsForValue().get(filename + userIp);
+            if(isExist==null){
+
+            }
+
+        }
+
+        return resource;
+    }
 
     public String saveImage(MultipartFile image) throws ImageException{
         if (image.isEmpty()) {

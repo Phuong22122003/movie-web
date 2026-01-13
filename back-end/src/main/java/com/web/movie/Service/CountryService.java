@@ -24,4 +24,9 @@ public class CountryService {
         List<Country> countries = countryRepository.findAll();
         return countryMapper.toCountryDtos(countries);
     }
+    public CountryDto addCountry(CountryDto request){
+        Country country = countryMapper.toCountry(request);
+        countryRepository.save(country);
+        return countryMapper.toCountryDto(country);
+    }
 }

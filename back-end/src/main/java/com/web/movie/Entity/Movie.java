@@ -39,6 +39,9 @@ public class Movie {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "VIEW_COUNT")
+    private Integer viewCount;
+
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;

@@ -13,7 +13,7 @@ export class AuthenticationService {
         return this.http.post(this.url+'/login',param);
     }
     sigup(param: any): Observable<any>{
-        return this.http.post(this.url+'/sigup',param);
+        return this.http.post(this.url+'/sign-up',param);
     }
     logout(){
         localStorage.removeItem('jwt');

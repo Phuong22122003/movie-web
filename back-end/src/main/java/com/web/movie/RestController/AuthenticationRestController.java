@@ -27,7 +27,7 @@ public class AuthenticationRestController {
         return ResponseEntity.ok().body(userService.login(loginRequest));
     }
 
-    @PostMapping("/sigup")
+    @PostMapping("/sign-up")
     public ResponseEntity<UserDto> sigup(@RequestBody SigupRequest sigupRequest){
         return ResponseEntity.ok().body(userService.addUser(sigupRequest));
     }

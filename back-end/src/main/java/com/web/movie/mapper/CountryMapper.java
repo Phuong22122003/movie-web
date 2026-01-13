@@ -10,4 +10,6 @@ import com.web.movie.Entity.Country;
 @Mapper(componentModel="spring")
 public interface CountryMapper {
     List<CountryDto> toCountryDtos(List<Country> countries);
+    Country toCountry(CountryDto countryDto);
+    CountryDto toCountryDto(Country country);
 }
