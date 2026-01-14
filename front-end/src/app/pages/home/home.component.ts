@@ -38,8 +38,8 @@ export class HomeComponent {
     });
   }
   loadRecentlyUpdateMovie(){
-    this.movieService.getRecentylyUpdateMovie(6).subscribe((moives)=>{
-      this.recentlyUpdatedMovie = moives;
+    this.movieService.getRecentlyUpdateMovie(6).subscribe((movies)=>{
+      this.recentlyUpdatedMovie = movies;
     })
   }
   ngOnInit() {

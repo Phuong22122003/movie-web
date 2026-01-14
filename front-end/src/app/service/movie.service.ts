@@ -4,15 +4,15 @@ import { Login } from '../models/login';
 import { HttpClient } from '@angular/common/http';
 import { Movie } from '../models/movie';
 import { PageResponse } from '../models/page';
-
+import { environment} from "../../environments/environment"
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
   constructor(private http: HttpClient) { }
-  url = 'http://localhost/api/v1/movies';
+  url =  environment.apiUrl + '/movies'; //'http://localhost/api/v1/movies';
 
-  getRecentylyUpdateMovie(limit:number): Observable<Movie[]>{
+  getRecentlyUpdateMovie(limit:number): Observable<Movie[]>{
     return this.http.get<Movie[]>(`${this.url}/recently-update`, {params:{'limit':limit}});
   }
   getMovieSlot(): Observable<Movie[]>{
@@ -37,7 +37,7 @@ export class MovieService {
   }
   addMovie(movie:FormData){
     console.log('add movie');
-    
+
     return this.http.post('http://localhost:80/api/v1/manage/movies',movie);
   }
   updateMovie(id:number,movie:FormData){
@@ -46,6 +46,6 @@ export class MovieService {
   }
   deleteMovie(id:number){
     console.log('delete movie');
-    return this.http.delete(`http://localhost:80/api/v1/manage/movies/${id}`);  
+    return this.http.delete(`http://localhost:80/api/v1/manage/movies/${id}`);
   }
 }

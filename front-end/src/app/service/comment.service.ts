@@ -3,13 +3,13 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Country } from '../models/country';
 import { Comment, CommentRequest } from '../models/comment';
-
+import { environment} from "../../environments/environment"
 @Injectable({
   providedIn: 'root'
 })
 export class CommnetService {
     constructor(private http: HttpClient){}
-    url = 'http://localhost/api/v1/comments'
+    url = environment.apiUrl +'/comments'
 
     getAll(movieId:number):Observable<Comment[]>{
         return this.http.get<Comment[]>(this.url+'/'+movieId);

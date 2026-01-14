@@ -21,7 +21,7 @@ export class ModalComponent {
   movieForm: FormGroup;
   genres!: Genre[];
   countries!: Country[];
-
+//   @Output
   showModal = false;
   isEditing = false;
   constructor(
@@ -90,7 +90,7 @@ export class ModalComponent {
     formData.append('image', this.imageFile);
     formData.append('video', this.videoFile);
     formData.append('movie', new Blob([JSON.stringify(moviePayload)], { type: 'application/json' }));
-    
+
     if(!this.isEditing){
       if (this.movieForm.invalid || !this.imageFile || !this.videoFile) return;
       this.movieService.addMovie(formData).subscribe({

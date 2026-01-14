@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Login } from '../models/login';
 import { HttpClient } from '@angular/common/http';
-
+import { environment} from "../../environments/environment"
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
     constructor(private http: HttpClient){}
-    url = 'http://localhost/api/v1/authenticate'
+    url = environment.apiUrl +'/authenticate'
     login(param:Login):Observable<any>{
         return this.http.post(this.url+'/login',param);
     }
