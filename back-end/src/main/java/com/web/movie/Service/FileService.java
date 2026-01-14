@@ -5,10 +5,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.web.movie.Repository.MovieRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
@@ -28,6 +31,9 @@ public class FileService {
     @Value("${file.upload-dir}")
     private String uploadDir;
     @Autowired private RedisTemplate<String,Object> redisTemplate;
+    @Autowired private MovieRepository movieRepository;
+
+    @Transactional
     public Resource getResource(String filename, MediaType mediaType, HttpServletRequest request) throws IOException {
 
         Path path = Paths.get(uploadDir+"/" + filename);
@@ -37,11 +43,11 @@ public class FileService {
 
         if(Objects.equals(mediaType, MediaType.valueOf("video/mp4"))){
             String userIp = request.getRemoteAddr();
-            Object isExist =  redisTemplate.opsForValue().get(filename + userIp);
-            if(isExist==null){
-
+            Object isExisted =  redisTemplate.opsForValue().get(filename + userIp);
+            if(isExisted==null){
+                movieRepository.updateViewCount(filename);
+                redisTemplate.opsForValue().set(filename + userIp,"VALUE", Duration.ofMinutes(10));
             }
-
         }
 
         return resource;

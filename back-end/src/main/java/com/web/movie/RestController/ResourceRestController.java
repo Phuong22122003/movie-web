@@ -7,11 +7,10 @@ import java.nio.file.Paths;
 
 
 import com.web.movie.Service.FileService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,9 +29,9 @@ public class ResourceRestController {
     @Value("${file.upload-dir}")
     private String uploadDir;
     @GetMapping("/image/{filename}")
-    public ResponseEntity<Resource> getImage(@PathVariable String filename, HttpRequest request) throws Exception {
+    public ResponseEntity<Resource> getImage(@PathVariable String filename, HttpServletRequest request) throws Exception {
 
-        Resource resource = fileService.getResource(filename, request);
+        Resource resource = fileService.getResource(filename, MediaType.IMAGE_JPEG ,request);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)
@@ -41,8 +40,8 @@ public class ResourceRestController {
 
     }
     @GetMapping("/video/{filename}")
-    public ResponseEntity<Resource> getVideo(@PathVariable String filename, HttpRequest request) throws IOException {
-            Resource resource = fileService.getResource(filename, request);
+    public ResponseEntity<Resource> getVideo(@PathVariable String filename, HttpServletRequest request) throws IOException {
+            Resource resource = fileService.getResource(filename, MediaType.valueOf("video/mp4") ,request);
             return ResponseEntity.ok()
                     .contentType(MediaType.valueOf("video/mp4"))
                     .contentLength(resource.contentLength())

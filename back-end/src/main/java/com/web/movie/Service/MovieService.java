@@ -70,6 +70,7 @@ public class MovieService {
         movie.setCountry(country);
         movie.setGenres(genres);
         movie.setCreatedDate(LocalDateTime.now());
+        movie.setViewCount(0);
         var savedMovie = movieRepository.save(movie);
    
         // fileService.deletImage(imagePath);

@@ -40,6 +40,10 @@ public interface MovieRepository extends JpaRepository<Movie,Integer>{
 
     @Query(value = "SELECT TOP(:limit) * FROM Movie order by CREATED_DATE", nativeQuery = true)
     List<Movie> getCurrentMovie(int limit);
+
+    @Modifying
+    @Query(value = "UPDATE Movie SET VIEW_COUNT = VIEW_COUNT + 1 WHERE VIDEO_FILE_NAME = :fileName", nativeQuery = true)
+    public void updateViewCount(String fileName);
 }
 
 

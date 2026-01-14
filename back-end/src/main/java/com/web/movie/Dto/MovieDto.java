@@ -28,4 +28,5 @@ public class MovieDto implements Serializable {
     private CountryDto country;
     // @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime createdDate;
+    private Integer viewCount;
 }
