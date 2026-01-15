@@ -85,15 +85,46 @@
           Sign Up
         </a>
       </ng-container>
-
+      <!-- USER MENU (logged in) -->
       <ng-container *ngIf="isLoggedIn">
-        <button
-          (click)="logout()"
-          class="hover:text-gray-400"
-        >
-          Logout
-        </button>
+        <div class="relative group cursor-pointer">
+
+          <!-- USER ICON -->
+          <div class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20">
+            <i class="fa-solid fa-user text-white"></i>
+          </div>
+
+          <!-- DROPDOWN -->
+          <ul
+            class="absolute right-0 mt-2 invisible group-hover:visible
+                  bg-white text-black rounded-md shadow-lg
+                  min-w-[160px] py-2 text-sm duration-150"
+          >
+            <li
+              routerLink="/favorite"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            >
+              ❤️ Favorite
+            </li>
+
+            <li
+              routerLink="/profile"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            >
+              👤 Profile
+            </li>
+
+            <li
+              (click)="logout()"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
+            >
+              🚪 Logout
+            </li>
+          </ul>
+
+        </div>
       </ng-container>
+
 
       <!-- NOTIFICATION -->
       <button class="relative hover:text-gray-400">

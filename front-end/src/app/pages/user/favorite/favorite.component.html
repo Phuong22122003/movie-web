@@ -1,0 +1,28 @@
+<div class="flex flex-col space-y-10 px-4 sm:px-6 lg:px-10">
+
+  <!-- Empty state -->
+  <div
+    *ngIf="favorites?.length === 0"
+    class="flex flex-col items-center justify-center py-20 text-center text-gray-400"
+  >
+    <div class="text-5xl mb-4">🎬</div>
+    <p class="text-lg font-medium text-white">
+      Bạn chưa có phim yêu thích nào
+    </p>
+    <p class="text-sm text-gray-400 mt-1">
+      Hãy thêm phim vào danh sách yêu thích của bạn!
+    </p>
+  </div>
+
+  <!-- Movie Grid -->
+  <div
+    *ngIf="favorites.length > 0"
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6"
+  >
+    <app-card
+      *ngFor="let favorite of favorites"
+      [movie]="favorite.movie"
+    ></app-card>
+  </div>
+
+</div>

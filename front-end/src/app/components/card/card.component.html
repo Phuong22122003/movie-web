@@ -19,9 +19,9 @@
     <!-- STAR fix cứng -->
     <div
       class="absolute top-2 right-2 flex items-center gap-1
-             bg-black/70 text-[11px] px-2 py-0.5 text-yellow-400"
+            text-[15px] px-2 py-0.5 text-red-400"
     >
-      ★ <span class="text-white">4.5</span>
+       <i class="fa-solid fa-heart text-[14px]"></i>
     </div>
 
     <!-- View count -->
@@ -39,10 +39,17 @@
       {{ movie.name }}
     </h3>
 
-    <!-- Country -->
-    <p class="text-[11px] text-gray-400 truncate">
-      {{ movie.country?.name }}
-    </p>
+    <div class="flex flex-row justify-between items-center">
+      <!-- Country -->
+      <p class="text-[11px] text-gray-400 truncate">
+        {{ movie.country?.name }}
+      </p>
+      <div
+        class="bg-black/70 text-[12px] px-2 py-0.5 text-yellow-400"
+      >
+        ★ <span class="text-white">4.5</span>
+      </div>
+    </div>
 
     <!-- Created year -->
     <p class="text-[11px] text-gray-500">

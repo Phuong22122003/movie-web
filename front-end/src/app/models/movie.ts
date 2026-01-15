@@ -11,4 +11,5 @@ export interface Movie {
     country?: Country;
     createdDate?: string;
     viewCount?: number;
+    isFavorited?: boolean;
 }

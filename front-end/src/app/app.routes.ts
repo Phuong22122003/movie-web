@@ -10,6 +10,7 @@ import { MovieAdminComponent } from './pages/movie-admin/movie-admin.component';
 import { SearchComponent } from './pages/search/search.component';
 import { GenreAdminComponent } from './pages/genre-admin/genre-admin.component';
 import { CountryAdminComponent } from './pages/country-admin/country-admin.component';
+import { FavoriteComponent } from './pages/user/favorite/favorite.component';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,10 @@ export const routes: Routes = [
             {
                 path: "home",
                 component: HomeComponent
+            },
+            {
+                path: "favorite",
+                component: FavoriteComponent,
             },
             {
                 path: "country/:value",
