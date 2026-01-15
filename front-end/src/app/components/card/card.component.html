@@ -1,21 +1,52 @@
 <div
-  class="w-[200px] flex-shrink-0 cursor-pointer group"
+  class="w-[220px] flex-shrink-0 cursor-pointer border border-neutral-800"
   [routerLink]="['/movie', movie.id]"
 >
-  <div class="relative overflow-hidden rounded-lg">
+  <!-- Image -->
+  <div class="relative aspect-[3/4] overflow-hidden group">
     <img
       [src]="movie.image_url"
-      class="h-[280px] w-full object-cover group-hover:scale-110 transition duration-300"
+      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
     />
 
+    <!-- HD -->
     <span
-      class="absolute top-2 left-2 bg-red-600 text-xs px-2 py-1 rounded"
+      class="absolute top-2 left-2 bg-red-600 text-[10px] px-2 py-0.5"
     >
       HD
     </span>
+
+    <!-- STAR fix cứng -->
+    <div
+      class="absolute top-2 right-2 flex items-center gap-1
+             bg-black/70 text-[11px] px-2 py-0.5 text-yellow-400"
+    >
+      ★ <span class="text-white">4.5</span>
+    </div>
+
+    <!-- View count -->
+    <span
+      class="absolute bottom-2 right-2 bg-black/70 text-white text-[11px] px-2 py-0.5"
+    >
+      {{ movie.viewCount }}
+    </span>
   </div>
 
-  <h3 class="mt-2 text-sm font-medium truncate">
-    {{ movie.name }}
-  </h3>
+  <!-- Info -->
+  <div class="p-2 space-y-1">
+    <!-- Name -->
+    <h3 class="text-sm font-medium truncate">
+      {{ movie.name }}
+    </h3>
+
+    <!-- Country -->
+    <p class="text-[11px] text-gray-400 truncate">
+      {{ movie.country?.name }}
+    </p>
+
+    <!-- Created year -->
+    <p class="text-[11px] text-gray-500">
+      {{ movie.createdDate | date:'yyyy' }}
+    </p>
+  </div>
 </div>

@@ -13,4 +13,13 @@ export class CountryService {
     getAll():Observable<Country[]>{
         return this.http.get<Country[]>(this.url);
     }
+    add(country: Country){
+        return this.http.post<Country>(this.url,country);
+    }
+    update(id:string, country: Country){
+        return this.http.put<Country>(this.url + '/' +id, country);
+    }
+    delete(id:string){
+        return this.http.delete(`${this.url}/${id}`);
+    }
 }

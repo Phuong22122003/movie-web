@@ -27,4 +27,15 @@ public class CountryRestController {
     public ResponseEntity<CountryDto> addCountry(@RequestBody CountryDto request){
         return ResponseEntity.ok(countryService.addCountry(request));
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<CountryDto> updateCountry(@PathVariable String id,@RequestBody CountryDto request){
+        return ResponseEntity.ok(countryService.updateCountry(id,request));
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCountry(@PathVariable String id){
+        countryService.deleteCountry(id);
+        return ResponseEntity.ok("Delete successfully");
+    }
+
 }

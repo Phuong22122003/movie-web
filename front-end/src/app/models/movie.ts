@@ -10,4 +10,5 @@ export interface Movie {
     genres?: Genre[];
     country?: Country;
     createdDate?: string;
+    viewCount?: number;
 }

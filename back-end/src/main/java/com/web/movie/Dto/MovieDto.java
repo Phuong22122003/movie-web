@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.web.movie.Dto.response.UserDto;
 
@@ -29,4 +28,5 @@ public class MovieDto implements Serializable {
     // @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime createdDate;
     private Integer viewCount;
+    private Boolean isFavorited;
 }

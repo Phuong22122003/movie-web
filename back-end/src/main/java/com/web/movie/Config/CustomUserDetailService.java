@@ -18,12 +18,12 @@ public class CustomUserDetailService implements UserDetailsService{
     @Autowired private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        com.web.movie.Entity.User webUser = userRepository.findByUsername(username).orElseThrow(()->new NotFoundException("User not found"));
-        if(webUser==null) throw new UsernameNotFoundException("Not found");
+        com.web.movie.Entity.User user = userRepository.findByUsername(username).orElseThrow(()->new NotFoundException("User not found"));
+        if(user==null) throw new UsernameNotFoundException("Not found");
         else {
             List<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(webUser.getRole().trim().toUpperCase()));
-            return new User(webUser.getUsername(), webUser.getPassword(), authorities);
+            authorities.add(new SimpleGrantedAuthority(user.getRole().trim().toUpperCase()));
+            return new User(user.getUsername(), user.getPassword(), authorities);
         }
     }
 }

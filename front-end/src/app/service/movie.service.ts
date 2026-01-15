@@ -38,14 +38,14 @@ export class MovieService {
   addMovie(movie:FormData){
     console.log('add movie');
 
-    return this.http.post('http://localhost:80/api/v1/manage/movies',movie);
+    return this.http.post(environment.apiUrl+'/manage/movies',movie);
   }
   updateMovie(id:number,movie:FormData){
     console.log('update movie');
-    return this.http.patch(`http://localhost:80/api/v1/manage/movies/${id}`,movie);
+    return this.http.patch(environment.apiUrl + `/manage/movies/${id}`,movie);
   }
   deleteMovie(id:number){
     console.log('delete movie');
-    return this.http.delete(`http://localhost:80/api/v1/manage/movies/${id}`);
+    return this.http.delete(environment.apiUrl +`/manage/movies/${id}`);
   }
 }

@@ -2,9 +2,11 @@ package com.web.movie.Service;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.web.movie.CustomException.NotFoundException;
 import com.web.movie.Dto.CountryDto;
 import com.web.movie.Entity.Country;
 import com.web.movie.Repository.CountryRepository;
@@ -28,5 +30,17 @@ public class CountryService {
         Country country = countryMapper.toCountry(request);
         countryRepository.save(country);
         return countryMapper.toCountryDto(country);
+    }
+    @CacheEvict(value = "countries",allEntries = true)
+    public CountryDto updateCountry(String id,CountryDto request){
+        Country country = countryRepository.findById(id).orElseThrow(()->new NotFoundException("Country not found"));
+        country.setName(request.getName());
+        countryRepository.save(country);
+        return countryMapper.toCountryDto(country);
+    }
+    @CacheEvict(value = "countries", allEntries = true)
+    public void deleteCountry(String id){
+        countryRepository.deleteById(id);
+        return;
     }
 }

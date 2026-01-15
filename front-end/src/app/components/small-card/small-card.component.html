@@ -1,8 +1,47 @@
-<div class="flex flex-row gap-4 bg-black w-[207px] cursor-pointer" routerLink="/movie/{{movie.id}}">
-    <img class="w-[100px] h-[103px]" src="{{movie.image_url}}" alt="">
-    <div class="flex flex-col items-start justify-center gap-1 text-white">
-        <span class="text-sm">{{movie.name}}</span>
-        <span class="text-sm text-gray-300 w-25 truncate">{{movie.description}}</span>
-        <span class="text-sm text-gray-300">{{movie.country?.name}}</span>
+<div
+  class="w-[140px] cursor-pointer group"
+  [routerLink]="['/movie', movie.id]"
+>
+  <!-- Poster -->
+  <div
+    class="relative w-full h-[200px] overflow-hidden rounded-lg shadow-lg"
+  >
+    <img
+      [src]="movie.image_url"
+      alt=""
+      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+    />
+
+    <!-- Gradient overlay -->
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+    ></div>
+
+    <!-- View count -->
+    <div
+      class="absolute top-1 right-1 bg-black/70 text-white text-[11px] px-1.5 py-0.5 rounded"
+      *ngIf="movie.viewCount"
+    >
+      👁 {{ movie.viewCount }}
     </div>
+
+    <!-- Movie name -->
+    <div class="absolute bottom-2 left-2 right-2">
+      <div
+        class="text-white text-sm font-semibold leading-tight line-clamp-2"
+      >
+        {{ movie.name }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Meta -->
+  <div class="mt-1 text-xs text-gray-400 flex justify-between">
+    <span *ngIf="movie.country">
+      {{ movie.country }}
+    </span>
+    <span *ngIf="movie.createdDate">
+      {{ movie.createdDate}}
+    </span>
+  </div>
 </div>

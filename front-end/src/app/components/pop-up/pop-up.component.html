@@ -1,0 +1,35 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm" *ngIf="visible">
+  <div class="w-full max-w-md rounded-xl bg-zinc-900 shadow-xl shadow-black/50
+           border border-zinc-800 px-6 py-4">
+    <h3 class="text-lg font-semibold mb-2">{{ title }}</h3>
+    <p class="text-gray-600 mb-4">{{ message }}</p>
+
+    <div class="actions flex justify-end gap-3">
+      <!-- NO -->
+      <button
+        (click)="no()"
+        class="
+          px-4 py-2 rounded
+          bg-gray-200 text-gray-700
+          hover:bg-gray-300
+          transition
+        "
+      >
+        No
+      </button>
+
+      <!-- YES -->
+      <button
+        (click)="yes()"
+        class="
+          px-4 py-2 rounded
+          bg-blue-500 text-white
+          hover:bg-blue-600
+          transition
+        "
+      >
+        Yes
+      </button>
+    </div>
+  </div>
+</div>
