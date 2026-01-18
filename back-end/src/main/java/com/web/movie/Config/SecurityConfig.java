@@ -7,7 +7,6 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,10 +40,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.authorizeHttpRequests((request)->request
-            // .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-            .requestMatchers("/api/v1/manage/**").hasAuthority("ADMIN")
-            // .requestMatchers(publicApi).permitAll()
-            .anyRequest().permitAll()
+            .requestMatchers(publicApi).permitAll()
+            .requestMatchers("/api/v1/manage/**").hasRole("ADMIN")
+            .anyRequest().authenticated()
         )
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
         .csrf((crsf)->crsf.disable())

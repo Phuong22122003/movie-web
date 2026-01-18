@@ -13,6 +13,18 @@ public class JwtTokenProvider {
     @Value("${app.jwt.duration}")
     private long expiration;
 
+    public String generateTokenForResourceAccess(){
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + 120*60*1000); // Token valid for 120 minutes
+        return Jwts.builder()
+                .setIssuer("Phương đẹp trai")
+                .setSubject("resource_access")
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512,secret_key)
+                .compact();
+        }
+
     public String generateToken(String userId){
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
@@ -30,6 +42,14 @@ public class JwtTokenProvider {
                             .parseClaimsJws(token)
                             .getBody();
         return claims.getSubject();
+    }
+    public boolean isExpired(String token){
+        if(token==null || token.isEmpty()) return true;
+        Claims claims = Jwts.parser()
+                            .setSigningKey(secret_key)
+                            .parseClaimsJws(token)
+                            .getBody();
+        return claims.getExpiration().before(new Date());
     }
     public boolean validateToken(String authToken){
         try{

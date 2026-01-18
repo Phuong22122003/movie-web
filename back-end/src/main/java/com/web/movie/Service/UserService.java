@@ -42,7 +42,7 @@ public class UserService {
     public UserDto addUser(SigupRequest sigupRequest){
         User user = userMapper.toUser(sigupRequest);
         user.setPassword(passwordEncoder.encode(sigupRequest.getPassword()));
-        user.setRole("USER");
+        user.setRole("ROLE_USER");
         User savedUser = null;
         try {
             savedUser = userRepository.save(user);

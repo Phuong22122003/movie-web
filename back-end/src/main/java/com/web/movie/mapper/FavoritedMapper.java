@@ -17,17 +17,8 @@ public interface FavoritedMapper {
     List<FavoriteResponseDto> toFavoriteResponseDtos(List<Favorite> favorites);
     
     @Mapping(target = "user", ignore = true)
-    @Mapping(target = "image_url", expression = "java(buildImageUrl(movie.getImageFileName()))")
-    @Mapping(target = "video_url", expression = "java(buildVideoUrl(movie.getVideoFileName()))")
+    @Mapping(target = "isFavorited", constant = "true")
+    @Mapping(target = "image_url", ignore = true)
+    @Mapping(target = "video_url", ignore = true)
     MovieDto movieToMovieDto(Movie movie);
-
-    @Named("imageUrlBuilder")
-    default String buildImageUrl(String imageFileName) {
-        return "http://localhost:80/api/v1/resource/image/" + imageFileName;
-    }
-
-    @Named("videoUrlBuilder")
-    default String buildVideoUrl(String videoFileName) {
-        return "http://localhost:80/api/v1/resource/video/" + videoFileName;
-    }
 }

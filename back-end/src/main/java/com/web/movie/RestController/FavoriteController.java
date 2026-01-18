@@ -2,6 +2,9 @@ package com.web.movie.RestController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,10 +18,12 @@ public class FavoriteController {
     public ResponseEntity<?> getFavorites(){
         return ResponseEntity.ok(favoriteService.getFavorites());
     }
-    public ResponseEntity<?> addFavorite(Integer movieId){
+    @PostMapping("/{movie_id}")
+    public ResponseEntity<?> addFavorite(@PathVariable(name = "movie_id") Integer movieId){
         return ResponseEntity.ok(favoriteService.addFavorite(movieId));
     }
-    public ResponseEntity<String> removeFavorite(String favoriteId){
+    @DeleteMapping("/{favorite_id}")
+    public ResponseEntity<String> removeFavorite(@PathVariable(name = "favorite_id") String favoriteId){
         favoriteService.removeFavorite(favoriteId);
         return ResponseEntity.ok("Remove successfully");
     }

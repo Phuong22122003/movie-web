@@ -12,21 +12,21 @@ import com.web.movie.Entity.Movie;
 
 @Mapper(componentModel = "spring")
 public interface MovieMapper {
-    @Mapping(target = "image_url", expression = "java(buildImageUrl(movie.getImageFileName()))")
-    @Mapping(target = "video_url", expression = "java(buildVideoUrl(movie.getVideoFileName()))")
+    // @Mapping(target = "image_url", expression = "java(buildImageUrl(movie.getImageFileName()))")
+    // @Mapping(target = "video_url", expression = "java(buildVideoUrl(movie.getVideoFileName()))")
     MovieDto toMovieDto(Movie movie);
 
     Movie toMovie(MovieRequestDto movie);
 
     List<MovieDto> toMovieDtos(List<Movie> movies);
 
-    @Named("imageUrlBuilder")
-    default String buildImageUrl(String imageFileName) {
-        return "http://localhost:80/api/v1/resource/image/" + imageFileName;
-    }
+    // @Named("imageUrlBuilder")
+    // default String buildImageUrl(String imageFileName) {
+    //     return "http://172.22.80.1:80/api/v1/resource/images/" + imageFileName;
+    // }
 
-    @Named("videoUrlBuilder")
-    default String buildVideoUrl(String videoFileName) {
-        return "http://localhost:80/api/v1/resource/video/" + videoFileName;
-    }
+    // @Named("videoUrlBuilder")
+    // default String buildVideoUrl(String videoFileName) {
+    //     return "http://172.22.80.1:80/api/v1/resource/videos/" + videoFileName;
+    // }
 }

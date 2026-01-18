@@ -1,0 +1,104 @@
+<div class="bg-[#0f0f0f] min-h-screen text-white">
+
+  <div class="max-w-[1400px] mx-auto px-6 py-14 space-y-16">
+
+    <!-- HERO -->
+    <section class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-red-600/20 to-black">
+      <div class="flex flex-col sm:flex-row items-center gap-8 p-10">
+
+        <!-- Avatar -->
+        <div
+          class="w-32 h-32 rounded-full bg-red-600 flex items-center justify-center text-5xl font-bold shrink-0"
+        >
+          {{ user.username[0] | uppercase }}
+        </div>
+
+        <!-- Info -->
+        <div class="space-y-3">
+          <h1 class="text-4xl font-bold tracking-wide">
+            {{ user.username }}
+          </h1>
+
+          <p class="text-gray-300 text-lg">
+            {{ user.email }}
+          </p>
+
+          <span class="inline-flex items-center gap-2 text-sm px-4 py-1.5 rounded-full bg-white/10 backdrop-blur">
+            <i class="fa-solid fa-user-shield text-red-500"></i>
+            {{ user.role }}
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ACCOUNT SECTION -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+      <!-- INFO CARD -->
+      <div class="bg-[#141414] rounded-2xl p-8 space-y-6">
+
+        <h2 class="text-xl font-semibold flex items-center gap-2">
+          <i class="fa-solid fa-id-card text-red-500"></i>
+          Thông tin tài khoản
+        </h2>
+
+        <!-- Username -->
+        <div class="space-y-1">
+          <p class="text-sm text-gray-400">Tên người dùng</p>
+
+          <input
+            type="text"
+            [(ngModel)]="user.username"
+            name="username"
+            class="w-full px-4 py-3 bg-[#0f0f0f] rounded-lg border border-gray-700 focus:border-red-500 focus:outline-none"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="space-y-1">
+          <p class="text-sm text-gray-400">Email</p>
+          <div class="px-4 py-3 bg-[#0f0f0f] rounded-lg text-gray-500 border border-gray-800">
+            {{ user.email }}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ACTION CARD -->
+      <div class="bg-[#141414] rounded-2xl p-8 flex flex-col justify-between">
+
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-gear text-red-500"></i>
+            Hành động
+          </h2>
+
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Bạn có thể cập nhật tên hiển thị. Email và quyền được quản lý bởi hệ thống.
+          </p>
+        </div>
+
+        <div class="flex gap-4 pt-6">
+          <button
+            (click)="reset()"
+            class="flex-1 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 transition"
+          >
+            Hoàn tác
+          </button>
+
+          <button
+            (click)="save()"
+            class="flex-1 py-3 rounded-xl bg-red-600 hover:bg-red-700 transition font-semibold"
+          >
+            Lưu thay đổi
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>

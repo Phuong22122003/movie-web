@@ -28,7 +28,7 @@ public class ResourceRestController {
     FileService fileService;
     @Value("${file.upload-dir}")
     private String uploadDir;
-    @GetMapping("/image/{filename}")
+    @GetMapping("/images/{filename}")
     public ResponseEntity<Resource> getImage(@PathVariable String filename, HttpServletRequest request) throws Exception {
 
         Resource resource = fileService.getResource(filename, MediaType.IMAGE_JPEG ,request);
@@ -39,7 +39,7 @@ public class ResourceRestController {
                 .body(resource);
 
     }
-    @GetMapping("/video/{filename}")
+    @GetMapping("/videos/{filename}")
     public ResponseEntity<Resource> getVideo(@PathVariable String filename, HttpServletRequest request) throws IOException {
             Resource resource = fileService.getResource(filename, MediaType.valueOf("video/mp4") ,request);
             return ResponseEntity.ok()

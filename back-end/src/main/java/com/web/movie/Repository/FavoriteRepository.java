@@ -10,8 +10,8 @@ import com.web.movie.Entity.Favorite;
 public interface FavoriteRepository extends JpaRepository<Favorite, String> {
     public List<Favorite> findByUserId(String userId);
 
-    @Query(value = "SELECT ID FROM Favorite WHERE USER_ID = :userId AND ID IN :ids", nativeQuery = true)
-    public List<String> filterFavoritedIds(String userId, List<String> ids);
+    @Query(value = "SELECT MOVIE_ID FROM Favorite WHERE USER_ID = :userId AND MOVIE_ID IN :movieIds", nativeQuery = true)
+    public List<Integer> filterFavoritedMovieIds(String userId, List<Integer> movieIds);
 
     public boolean existsByUserIdAndMovieId(String userId, Integer movieId);
 }

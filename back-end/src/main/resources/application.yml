@@ -31,6 +31,7 @@ spring:
 file:
   upload-dir: ${UPLOAD_DIR:File}
 app:
+  url: http://localhost/api/v1
   jwt:
     secret-key: '"phuong"'
     duration: 604800000

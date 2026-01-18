@@ -18,10 +18,14 @@
 
     <!-- STAR fix cứng -->
     <div
-      class="absolute top-2 right-2 flex items-center gap-1
-            text-[15px] px-2 py-0.5 text-red-400"
+      class="hidden top-2 right-2 flex items-center gap-1
+            text-[18px] px-2 py-0.5 text-white-400 group-hover:block group-hover:absolute hover:scale-120"
+      [ngClass]="{'text-red-600': movie.isFavorited}"
+      (click)="onClick($event)"
     >
-       <i class="fa-solid fa-heart text-[14px]"></i>
+      
+      <i *ngIf="!movie.isFavorited" class="fa-regular fa-bookmark"></i>
+      <i *ngIf="movie.isFavorited" class="fa-solid fa-bookmark"></i>
     </div>
 
     <!-- View count -->

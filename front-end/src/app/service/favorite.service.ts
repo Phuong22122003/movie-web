@@ -16,4 +16,8 @@ export class FavoriteService {
     getAll():Observable<Favorite[]>{
         return this.http.get<Favorite[]>(this.url);
     }
+    
+    addFavorite(movieId:number){
+        return this.http.post(`${this.url}/${movieId}`,null);
+    }
 }

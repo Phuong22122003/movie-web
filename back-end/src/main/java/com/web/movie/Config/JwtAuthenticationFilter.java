@@ -30,16 +30,28 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || path.startsWith("/swagger-ui")
                 || path.equals("/swagger-ui.html")
                 || path.startsWith("/api/v1/authenticate")
-                || path.startsWith("/api/v1/resource");
+                || path.contains("/resource/images");
     }
 
     @Override
     protected void doFilterInternal(@SuppressWarnings("null") HttpServletRequest request,
             @SuppressWarnings("null") HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        String path = request.getRequestURI();
         try {
+            String jwt;
+            if(path.contains("/resource/videos")){
+                jwt = request.getParameter("token");
+                boolean isExpired = jwtTokenProvider.isExpired(jwt);
+                if(isExpired){
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    return;
+                }
+                filterChain.doFilter(request, response);
+                return;
+            }
+            jwt = getJwtFromRequest(request);
             System.out.println(request.getRequestURI());
-            String jwt = getJwtFromRequest(request);
             if (jwtTokenProvider.validateToken(jwt)) {
                 String username = jwtTokenProvider.getUsernameFromJwt(jwt);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
